@@ -53,7 +53,7 @@ body {
   align-items: center;
 }
 
-#todo-input {
+.todoinput {
   width: 90%;
   height: 100%;
   border: none;
@@ -62,7 +62,7 @@ body {
   font-size: 15px;
 }
 
-#todo-input:focus {
+.todoinput:focus {
   outline: none;
 }
 

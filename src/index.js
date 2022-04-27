@@ -1,30 +1,54 @@
 import './style/main.css';
-import moreImage from './img/more.svg';
+import deleteImage from './img/delete.svg';
 
-const todos = [
-  { description: 'Do workouts', isComplet: false, index: 1 },
-  { description: 'Go to shop', isComplet: false, index: 2 },
-  { description: 'Do bath', isComplet: false, index: 3 },
-  { description: 'Read book', isComplet: false, index: 3 },
-];
+import {
+  addTodo, deleteTodo, updateDescription, refreshPage,
+} from './utils.js';
 
 const myWrapper = document.getElementById('list-wrapper');
+const todoInput = document.getElementById('todo-input');
 
+document.getElementById('refresh').addEventListener('click', () => refreshPage());
+
+todoInput.addEventListener('keyup', (e) => {
+  if (e.key === 'Enter') {
+    addTodo(e.target.value);
+  }
+});
+
+const todos = JSON.parse(localStorage.getItem('todos'))
+  ? JSON.parse(localStorage.getItem('todos'))
+  : [];
 todos.forEach((todo) => {
   const listItem = document.createElement('li');
   listItem.classList.add('list-item');
-  const itemContent = document.createElement('p');
+  const itemContent = document.createElement('input');
   const checkBox = document.createElement('input');
   const moreIcon = document.createElement('img');
   const myContentWrapper = document.createElement('div');
   myContentWrapper.classList.add('ct-wrapper');
   moreIcon.classList.add('icon-cust');
-  moreIcon.setAttribute('src', `${moreImage}`);
-  moreIcon.setAttribute('width', '6');
-  moreIcon.setAttribute('heigt', '10');
+  moreIcon.setAttribute('src', `${deleteImage}`);
+  moreIcon.setAttribute('width', '20');
+  moreIcon.setAttribute('heigt', '20');
+  moreIcon.addEventListener('click', () => {
+    deleteTodo(todo.index);
+  });
   checkBox.setAttribute('type', 'checkbox');
+  checkBox.checked = todo.completed;
+  itemContent.style.textDecoration = todo.completed ? 'line-through' : 'none';
+  itemContent.classList.add('todoinput');
+  itemContent.disabled = true;
+  listItem.addEventListener('click', () => {
+    itemContent.disabled = false;
+  });
+  itemContent.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') {
+      updateDescription(todo.index, e.target.value);
+    }
+  });
   itemContent.classList.add('p-todo-desck');
-  itemContent.innerHTML = todo.description;
+  itemContent.value = todo.description;
   myContentWrapper.appendChild(checkBox);
   myContentWrapper.appendChild(itemContent);
   listItem.appendChild(myContentWrapper);
@@ -38,5 +62,4 @@ const pBottom = document.createElement('p');
 pBottom.classList.add('p-bottom');
 pBottom.innerHTML = 'Clear all completed';
 listItemBottom.appendChild(pBottom);
-
 myWrapper.appendChild(listItemBottom);
