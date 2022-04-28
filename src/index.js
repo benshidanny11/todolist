@@ -2,7 +2,7 @@ import './style/main.css';
 import deleteImage from './img/delete.svg';
 
 import {
-  addTodo, deleteTodo, updateDescription, refreshPage,
+  addTodo, deleteTodo, clearAllComplele, checkTodo, updateDescription, refreshPage,
 } from './utils.js';
 
 const myWrapper = document.getElementById('list-wrapper');
@@ -47,6 +47,12 @@ todos.forEach((todo) => {
       updateDescription(todo.index, e.target.value);
     }
   });
+  checkBox.addEventListener('change', () => {
+    const completed = checkTodo(todo.completed);
+    todo.completed = completed;
+    localStorage.setItem('todos', JSON.stringify(todos));
+    window.location.reload();
+  });
   itemContent.classList.add('p-todo-desck');
   itemContent.value = todo.description;
   myContentWrapper.appendChild(checkBox);
@@ -62,4 +68,7 @@ const pBottom = document.createElement('p');
 pBottom.classList.add('p-bottom');
 pBottom.innerHTML = 'Clear all completed';
 listItemBottom.appendChild(pBottom);
+
+pBottom.addEventListener('click', clearAllComplele);
+
 myWrapper.appendChild(listItemBottom);

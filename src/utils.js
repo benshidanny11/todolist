@@ -22,6 +22,20 @@ export const deleteTodo = (index) => {
   }
 };
 
+export const clearAllComplele = () => {
+  const remainingTodos = todos.filter((todo) => !todo.completed);
+  if (remainingTodos.length > 0) {
+    remainingTodos.forEach((todo, index) => {
+      todo.index = index + 1;
+    });
+    localStorage.setItem('todos', JSON.stringify(remainingTodos));
+    window.location.reload();
+  } else {
+    localStorage.setItem('todos', JSON.stringify(remainingTodos));
+    window.location.reload();
+  }
+};
+
 export const updateDescription = (index, description) => {
   const todo = todos.filter((todo) => todo.index === index)[0];
   todo.description = description;
@@ -30,3 +44,5 @@ export const updateDescription = (index, description) => {
 };
 
 export const refreshPage = () => window.location.reload();
+
+export const checkTodo = (completed) => !completed;
