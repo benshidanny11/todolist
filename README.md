@@ -2,7 +2,7 @@
 
 ## Description
 
-> This is a web app that helps user to manage daily activities. By providing a task description and pressing enter key on key board, you are able to add your task to the list. With Todo list app you can also update the task description, remove task, mark task as completed and remove all completed task tasks.
+> Todo list is a web app that helps users to manage daily activities. With the Todo list app, you can update the task description, remove, mark them as completed,  and remove all completed tasks.
 
 ## Features
 - Adding a new item.
