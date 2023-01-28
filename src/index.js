@@ -53,6 +53,7 @@ todos.forEach((todo) => {
     localStorage.setItem('todos', JSON.stringify(todos));
     window.location.reload();
   });
+
   itemContent.classList.add('p-todo-desck');
   itemContent.value = todo.description;
   myContentWrapper.appendChild(checkBox);
