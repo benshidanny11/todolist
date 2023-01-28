@@ -18,7 +18,7 @@
 
 ## Live demo
 
-[Click here to visit](https://benshidanny11.github.io/todolist/dist/index.html)
+[Click here to visit](https://mytodolistapp.herokuapp.com/)
 
 ## Prerequisites
 
